@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 import re
 from keep_alive import keep_alive
+# Usamos la nueva librería de búsqueda
 from duckduckgo_search import DDGS
 
 # CONFIGURACIÓN
@@ -61,6 +62,3 @@ async def buscar_peli(ctx, *, nombre):
 if DISCORD_TOKEN:
     keep_alive()
     bot.run(DISCORD_TOKEN)
-    bot.run(DISCORD_TOKEN)
-else:
-    print("❌ ERROR: No encontré el DISCORD_TOKEN en las variables de entorno.")
