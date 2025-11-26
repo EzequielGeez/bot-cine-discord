@@ -23,18 +23,22 @@ async def buscar_peli(ctx, *, nombre):
     await ctx.send(f"🔎 Buscando **'{nombre}'** en Google...")
     
     try:
-        # 1. Buscamos en Google: "Nombre pelicula site:imdb.com"
-        # Esto nos da la URL exacta de IMDb
+        # 1. Buscamos en Google
+        # "Nombre pelicula site:imdb.com" nos da la ficha exacta
         query = f"site:imdb.com/title {nombre} movie"
+        
+        # Buscamos 1 resultado
         resultados = list(search(query, num_results=1, advanced=True))
         
         if not resultados:
-            await ctx.send("❌ Google no encontró nada. Intenta ser más específico (ej: '!peli Avengers 2012').")
+            await ctx.send("❌ Google no encontró nada. Prueba con el nombre en inglés o el año.")
             return
 
         # Tomamos el primer resultado
         resultado = resultados[0]
         url_imdb = resultado.url
+        
+        # Limpiamos el título
         titulo = resultado.title.replace(" - IMDb", "").replace("IMDb", "")
         descripcion = resultado.description
         
@@ -42,7 +46,7 @@ async def buscar_peli(ctx, *, nombre):
         match = re.search(r'tt\d+', url_imdb)
         
         if not match:
-            await ctx.send("❌ Encontré la web pero no el código de la película.")
+            await ctx.send("❌ Encontré la web pero no el ID de la película.")
             return
             
         imdb_id = match.group(0)
@@ -60,7 +64,7 @@ async def buscar_peli(ctx, *, nombre):
 
     except Exception as e:
         print(f"Error: {e}")
-        await ctx.send(f"Error al buscar: {e}")
+        await ctx.send(f"Error técnico: {e}")
 
 if DISCORD_TOKEN:
     keep_alive()
