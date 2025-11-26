@@ -7,7 +7,7 @@ from imdb import Cinemagoer
 
 # --- CONFIGURACIÓN ---
 # Render buscará esto en las "Environment Variables"
-DISCORD_TOKEN = os.environ.get('MTQ0MjM4OTY3NzgxMzI2ODU5MQ.GI9IbO.yA0bp9gbv-5pYGebzkBQ6eB2MEn2xBDu8b1NkY')
+DISCORD_TOKEN = os.environ.get('DISCORD_TOKEN')
 
 # Configuración del bot
 intents = discord.Intents.default()
